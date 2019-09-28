@@ -1,0 +1,51 @@
+<style>
+    p{
+    color: black
+}
+</style>
+
+<p id="result">Input any number</p>
+<input id="number"/>
+<button onclick="testFunction()">Guess</button>
+<h3 id="passGuess"></h3>
+
+<script>
+var currentNumber = Math.floor(Math.random()*10)
+console.log('currentNumber', currentNumber)
+var count = 10
+var pass = "Pass guess:</br>" 
+function testFunction()
+{
+    var inputNumber = parseInt(document.getElementById("number").value)
+    document.getElementById("passGuess").innerHTML = pass += inputNumber + '</br>'
+    console.log('inputNumber', inputNumber)
+    if (inputNumber === currentNumber)
+    {
+        document.getElementById("result").innerHTML = "Success"
+        document.getElementById("result").style.backgroundColor = "green"
+        setTimeout(function() {location.reload()}, 1000)
+    }
+    else
+    {
+        count--
+        document.getElementById("result").style.backgroundColor = "red"
+        if (inputNumber < currentNumber)
+        {
+            document.getElementById("result").innerHTML = "Sorry your guess is too low. You have " + count + " time left."
+        }
+        else
+        {
+            document.getElementById("result").innerHTML = "Sorry your guess is too high. You have " + count + " time left."
+        }
+        
+        if (count <= 0)
+        {
+            alert("You didn't have any guess left. Page reload!")
+            location.reload()
+        }
+    }
+    
+}
+</script>
+
+
