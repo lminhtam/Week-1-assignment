@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript">
+        var array
+        var max
+        function initRandomArray() {
+            var t = '<strong>The array is:</strong></br>'
+            array = new Array()
+            for (let i = 0; i < 10; i++) {
+                array.push(Math.floor(Math.random() * 10))
+                if (i < 9) {
+                    t = t + array[i] + ', '
+                }
+                else {
+                    t = t + array[i] + '</br>'
+                }
+            }
+            t = t + 'Find largest sum of sequential 3-element sub array'
+            document.getElementById('array').innerHTML = t;
+
+            var sum = array[0] + array[1] + array[2]
+            max = sum
+            for (let i = 1; i <= 7; i++) {
+                sum = sum - array[i - 1] + array[i + 2]
+                max = (sum > max) ? sum : max
+            }
+            console.log(max)
+        }
+        window.onload = initRandomArray
+        var count = 10
+        var pass = "<strong>Pass answer:</strong></br>"
+        function check() {
+            var input = document.getElementById('inputNumber').value
+            pass += input + '</br>'
+            document.getElementById('passAnswer').innerHTML = pass
+            if (input == max) {
+                alert('Right answer. Page reload.')
+                location.reload()
+            }
+            else {
+                count--
+                alert("Wrong answer")
+
+                if (count <= 0) {
+                    alert("You didn't have any turn left. Page reload!")
+                    location.reload()
+                }
+            }
+            document.getElementById('inputNumber').value = ''
+        }
+    </script>
+    <title>Extra</title>
+</head>
+
+<body>
+    <style>
+        input {
+            border-radius: 50px;
+            width: 300px;
+            height: 30px;
+            font-size: 18px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 15px;
+            text-align: center
+        }
+
+        input:hover {
+            box-shadow: 3px 3px gainsboro,
+                -3px -3px gainsboro, 3px -3px gainsboro,
+                -3px 3px gainsboro;
+            cursor: text
+        }
+
+        #submitButton {
+            margin: 15px;
+            border-radius: 3px;
+            width: 100px;
+            height: 35px;
+            text-align: center;
+            border-color: none;
+            background-color: gainsboro;
+            color: gray;
+            font-size: 18px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        #submitButton:hover {
+            cursor: pointer;
+            color: black;
+            border-color: gray
+        }
+
+        div {
+            text-align: center;
+            margin: 100px 0px 0px 0px
+        }
+
+        p {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 20px;
+            margin: 15px
+        }
+    </style>
+    <div>
+        <p id="array">The array is:</p>
+        <input type="number" id="inputNumber" placeholder="Input a number" /></br>
+        <button id="submitButton" onclick="check()">Submit</button>
+        <p id='passAnswer'></p>
+    </div>
+</body>
+
+</html>
